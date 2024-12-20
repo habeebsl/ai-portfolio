@@ -1,0 +1,196 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&display=swap');
+
+:root {
+    --background: #030307;
+    --surface: #0c0c12;
+    --surface-bright: #13131c;
+    --primary: #6366f1;
+    --primary-light: #818cf8;
+    --secondary: #22d3ee;
+    --accent: #f471b5;
+    --text: #ffffff;
+    --text-secondary: #9ca3af;
+    --border: #1e1e2a;
+}
+
+body {
+    background: var(--background);
+    color: var(--text);
+    font-family: 'Space Grotesk', sans-serif;
+    margin: 0;
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow-y: auto;
+    padding-bottom: 20px;
+}
+
+.chat-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 24px;
+    min-height: calc(100vh - 80px);
+    padding-bottom: 120px;
+}
+
+.message-container {
+    display: flex;
+    gap: 16px;
+    padding: 20px;
+    margin: 20px 0;
+    background: linear-gradient(165deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 18px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.message-container:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.2);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text);
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.message-content {
+    flex: 1;
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--text);
+}
+
+.input-wrapper {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 24px;
+    background: linear-gradient(
+        to bottom,
+        transparent,
+        var(--background) 20%
+    );
+    backdrop-filter: blur(28px);
+    -webkit-backdrop-filter: blur(28px);
+    z-index: 100;
+    margin-top: 24px;
+}
+
+.input-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    position: relative;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.input-field {
+    width: 100%;
+    padding: 20px 70px 20px 24px;
+    background: transparent;
+    border: none;
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.6;
+    font-family: inherit;
+    resize: none;
+    outline: none;
+    position: relative;
+    z-index: 2;
+}
+
+.send-button {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    border: none;
+    border-radius: 14px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    overflow: hidden;
+}
+
+.prompt-suggestions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 18px;
+    margin: 24px 0;
+}
+
+.suggestion-box {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 14px;
+    padding: 16px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.suggestion-box:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.suggestion-title {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 8px;
+}
+
+.suggestion-text {
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+.typing-indicator {
+    display: flex;
+    gap: 4px;
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+}
+
+.typing-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: #fff;
+    animation: typingBounce 1.4s infinite ease-in-out;
+}
+
+.typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes typingBounce {
+    0%, 60%, 100% { transform: translateY(0); }
+    30% { transform: translateY(-4px); }
+}
+
+code {
+    background-color: var(--surface); /* Matches your theme's surface color */
+    color: var(--primary); /* Highlight with primary color */
+    padding: 2px 6px; /* Adds padding for better readability */
+    border-radius: 4px; /* Smooth corners */
+    font-family: 'Courier New', Courier, monospace; /* Monospaced font for code */
+    font-size: 0.9em; /* Slightly smaller than surrounding text */
+}

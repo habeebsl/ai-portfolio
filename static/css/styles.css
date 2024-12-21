@@ -21,7 +21,6 @@ body {
     line-height: 1.6;
     min-height: 100vh;
     overflow-y: auto;
-    padding-bottom: 20px;
 }
 
 .chat-container {
@@ -29,7 +28,15 @@ body {
     margin: 0 auto;
     padding: 24px;
     min-height: calc(100vh - 80px);
-    padding-bottom: 120px;
+    padding-bottom: 200px;
+}
+
+[data-has-messages="true"] ~ .input-wrapper .prompt-suggestions {
+    display: none;
+}
+
+[data-has-messages="true"] {
+    padding-bottom: 130px;
 }
 
 .message-container {
@@ -83,7 +90,36 @@ body {
     backdrop-filter: blur(28px);
     -webkit-backdrop-filter: blur(28px);
     z-index: 100;
-    margin-top: 24px;
+}
+
+.prompt-suggestions {
+    max-width: 1000px;
+    margin: 0 auto 16px auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+}
+
+.suggestion-box {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 12px 14px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.suggestion-box:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.suggestion-text {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.4;
 }
 
 .input-container {
@@ -92,13 +128,20 @@ body {
     position: relative;
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 20px;
+    border-radius: 16px;
     overflow: hidden;
+    transition: all 0.2s ease;
+}
+
+.input-container:focus-within {
+    border-color: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.04);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .input-field {
     width: 100%;
-    padding: 20px 70px 20px 24px;
+    padding: 18px 66px 18px 20px;
     background: transparent;
     border: none;
     color: var(--text);
@@ -113,13 +156,13 @@ body {
 
 .send-button {
     position: absolute;
-    right: 16px;
+    right: 12px;
     top: 50%;
     transform: translateY(-50%);
-    width: 44px;
-    height: 44px;
+    width: 42px;
+    height: 42px;
     border: none;
-    border-radius: 14px;
+    border-radius: 12px;
     background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
     color: white;
     cursor: pointer;
@@ -127,39 +170,21 @@ body {
     align-items: center;
     justify-content: center;
     z-index: 2;
-    overflow: hidden;
+    transition: all 0.2s ease;
 }
 
-.prompt-suggestions {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 18px;
-    margin: 24px 0;
+.send-button:hover {
+    transform: translateY(-50%) scale(1.05);
+    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
 }
 
-.suggestion-box {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 14px;
-    padding: 16px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.suggestion-box:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
-}
-
-.suggestion-title {
-    font-size: 15px;
-    font-weight: 500;
-    color: var(--text);
-    margin-bottom: 8px;
-}
-
-.suggestion-text {
-    font-size: 14px;
-    color: var(--text-secondary);
+code {
+    background-color: var(--surface);
+    color: var(--primary);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.9em;
 }
 
 .typing-indicator {
@@ -184,13 +209,4 @@ body {
 @keyframes typingBounce {
     0%, 60%, 100% { transform: translateY(0); }
     30% { transform: translateY(-4px); }
-}
-
-code {
-    background-color: var(--surface);
-    color: var(--primary);
-    padding: 2px 6px;
-    border-radius: 4px;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 0.9em;
 }

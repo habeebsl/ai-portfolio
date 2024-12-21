@@ -3,25 +3,7 @@
 {% block title %}Habeeb Salami{% endblock %}
 
 {% block content %}
-<div class="chat-container" id="content">
-
-    <div class="prompt-suggestions">
-        <div class="suggestion-box">
-            <div class="suggestion-title">Professional Experience</div>
-            <div class="suggestion-text">Tell me about your work history and roles</div>
-        </div>
-        
-        <div class="suggestion-box">
-            <div class="suggestion-title">Technical Skills</div>
-            <div class="suggestion-text">What technologies are you proficient in?</div>
-        </div>
-        
-        <div class="suggestion-box">
-            <div class="suggestion-title">Featured Projects</div>
-            <div class="suggestion-text">Show me your best development work</div>
-        </div>
-    </div>
-
+<div class="chat-container" id="content" data-has-messages="{{ 'true' if conversations else 'false' }}">
     {% for convo in conversations %}
         {% if convo.role == "assistant" %}
         <!-- AI Message -->
@@ -45,6 +27,14 @@
 </div>
 
 <div class="input-wrapper">
+    <div class="prompt-suggestions">
+        {% for prompt in prompts %}
+        <div class="suggestion-box">
+            <div class="suggestion-text">{{ prompt }}</div>
+        </div>
+        {% endfor %}
+    </div>
+
     <div class="input-container">
         <textarea class="input-field" id="message-input" placeholder="Ask anything..."></textarea>
         <button class="send-button" id="submit-btn">

@@ -1,14 +1,16 @@
 document.addEventListener("DOMContentLoaded", () => {
     const messageInput = document.getElementById("message-input")
     const messageCont = document.getElementsByClassName("message-container")
+    const suggestions = document.querySelector('.prompt-suggestions');
     const submitBtn = document.getElementById("submit-btn")
+    const suggestionBoxes = document.querySelectorAll('.suggestion-box')
+
     const content = document.getElementById("content")
     const submitSvg = 
     `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
     <path d="M22 2L11 13M22 2L15 22L11 13M11 13L2 9L22 2"/>
     </svg>`
 
-    console.log(messageCont)
     requestAnimationFrame(() => {
         if (messageCont.length) {
             window.scrollTo(0, document.body.scrollHeight);
@@ -16,7 +18,13 @@ document.addEventListener("DOMContentLoaded", () => {
             window.scrollTo(0, 0);    
         }
     });
-   
+
+    suggestionBoxes.forEach(function(box) {
+        box.addEventListener("click", () => {
+            const promptText = box.querySelector('.suggestion-text').textContent;
+            sendMessage(promptText)
+        })
+    })
 
     submitBtn.addEventListener("click", sendMessage)
 
@@ -27,6 +35,11 @@ document.addEventListener("DOMContentLoaded", () => {
             } 
         }
     })
+
+    function hideSuggestions() {
+        suggestions.style.display = 'none';
+        content.style.paddingBottom = '130px';
+    }
 
     // Helper function: Reset send button
     function resetSendButton() {
@@ -61,8 +74,13 @@ document.addEventListener("DOMContentLoaded", () => {
         return messageContainer;
     }
     
-    async function sendMessage() {
-        message = messageInput.value.trim()
+    async function sendMessage(prompt=null) {
+        let message = "";
+        if (prompt === null) {
+            message = messageInput.value.trim()
+        } else {
+            message = prompt
+        }
         
         if (!message){
             messageInput.value = "";
@@ -73,6 +91,11 @@ document.addEventListener("DOMContentLoaded", () => {
         requestAnimationFrame(() => {
             window.scrollTo(0, document.body.scrollHeight);
         });
+        
+        if (suggestions) {
+            hideSuggestions()
+        }
+
         messageInput.value = ""
         submitBtn.disabled = true
         submitBtn.innerHTML = 

@@ -245,9 +245,9 @@ code {
 
 .scroll-bottom-button {
     position: fixed;
-    bottom: 126px;  /* Increased to be more visible above input area */
+    bottom: 126px;
     right: 24px;
-    background: var(--primary);  /* Using your theme's primary color */
+    background: var(--primary);
     border: none;
     border-radius: 50%;
     width: 44px;
@@ -259,12 +259,12 @@ code {
     opacity: 0;
     transform: translateY(20px);
     transition: all 0.3s ease;
-    z-index: 1000;  /* Ensure it's above other elements */
+    z-index: 1000;
     box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
 }
 
 .scroll-bottom-button svg {
-    color: white;  /* Make the icon white */
+    color: white;
 }
 
 .scroll-bottom-button.visible {
@@ -276,8 +276,6 @@ code {
     transform: scale(1.05);
     background: var(--primary-light);
 }
-
-/* Add to your styles.css */
 
 .new-message-notification {
     position: fixed;
@@ -323,7 +321,6 @@ code {
     }
 }
 
-/* Hover effect */
 .new-message-notification:hover {
     background: var(--primary-light);
     transform: translateX(-50%) translateY(-2px);
@@ -399,7 +396,6 @@ code {
 }
 
 .profile-image {
-    /* width: 280px; */
     height: 280px;
     border-radius: 24px;
     object-fit: cover;
@@ -480,7 +476,6 @@ code {
     }
 
     .profile-image {
-        /* width: 240px; */
         height: 240px;
     }
 

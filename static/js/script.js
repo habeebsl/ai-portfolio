@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const submitBtn = document.getElementById("submit-btn");
     const suggestionBoxes = document.querySelectorAll('.suggestion-box');
     const content = document.getElementById("content");
+    const heroSection = document.querySelector(".hero-section");
 
     // State Variables
     let isScrolledUp = false;
@@ -50,7 +51,9 @@ document.addEventListener("DOMContentLoaded", () => {
             handleError("It seems you're offline right now. Please check your internet connection and try again.");
             return;
         }
-
+        if (document.querySelector(".hero-section")) {
+            removeHeroSection()
+        }
         displayUserMessage(message);
         resetInput();
         setLoadingState();
@@ -108,9 +111,10 @@ document.addEventListener("DOMContentLoaded", () => {
     function checkScroll() {
         if (content.querySelectorAll('.message-container').length < 2) {
             hideScrollButton();
+            content.style.paddingBottom = '0'
             return;
         }
-
+        content.style.paddingBottom = '150px'
         const distanceFromBottom = document.documentElement.scrollHeight - window.scrollY - window.innerHeight;
         isScrolledUp = distanceFromBottom > 100;
         
@@ -140,7 +144,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // UI Helpers
     function initializeTextArea(textArea, maxHeight = 200) {
         const initialHeight = textArea.scrollHeight;
-           
+
         function updateHeight() {
             textArea.style.height = 'auto';
             const newHeight = Math.max(
@@ -180,6 +184,14 @@ document.addEventListener("DOMContentLoaded", () => {
         if (suggestions) hideSuggestions();
     }
 
+    function manageHeroSection() {
+        if (heroSection) {
+            document.body.style.overflowY = 'hidden'
+        } else {
+            document.body.style.overflowY = 'auto'
+        }
+    }
+
     function resetInput() {
         messageInput.value = "";
         messageInput.style.height = 'auto';
@@ -217,6 +229,13 @@ document.addEventListener("DOMContentLoaded", () => {
         suggestions.style.display = 'none';
         if (content.querySelector('.message-container')) {
             content.style.paddingBottom = '150px';
+        }
+    }
+
+    function removeHeroSection() {
+        if (heroSection) {
+            heroSection.remove()
+            document.body.style.overflowY = 'auto';
         }
     }
 
@@ -280,6 +299,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Initialization
     initializeTextArea(messageInput);
+    manageHeroSection();
     requestAnimationFrame(() => {
         messageCont.length ? window.scrollTo(0, document.body.scrollHeight) : window.scrollTo(0, 0);
     });

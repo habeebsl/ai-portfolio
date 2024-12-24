@@ -3,6 +3,25 @@
 {% block title %}Habeeb Salami{% endblock %}
 
 {% block content %}
+{% if not conversations %}
+<div class="hero-section">
+    <div class="hero-content">
+        <div class="ai-badge">AI-Powered Portfolio</div>
+        <div class="name-heading">Hey, I'm <span class="gradient-text">Habeeb Salami</span></div>
+        <div class="role">Software Engineer & Prompt Engineer</div>
+        <h1>Experience my journey through <span class="gradient-text">interactive AI</span></h1>
+        <p class="hero-text">Ask anything about my skills, projects, and experiences</p>
+    </div>
+    
+    <div class="visual-element">
+        <div class="glow-effect"></div>
+        <img src="{{ url_for('static', filename='images/portrait1.jpeg') }}" alt="Habeeb Salami" class="profile-image">
+        <div class="tech-sphere"></div>
+        <div class="code-sphere"></div>
+    </div>
+</div>
+{% endif %}
+
 <div class="chat-container" id="content" data-has-messages="{{ 'true' if conversations else 'false' }}">
     {% for convo in conversations %}
         {% if convo.role == "assistant" %}

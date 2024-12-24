@@ -64,10 +64,10 @@ GitHub: (Code available upon request)
 
 **Skills**
 Technical:
-- Languages: C, Python, JavaScript, HTML, CSS  
-- Frameworks & Tools: Node.js, Flask, Django, Redis, PostgreSQL, SQLite  
+- Languages: C, Python, JavaScript, SQL, HTML, CSS
+- Frameworks & Tools: Node.js, Flask, Django, Redis, PostgreSQL, MySQL, SQLite  
 - Cloud & Deployment: AWS, Render, Vercel, Heroku, Tembo, Supabase  
-- Version Control: Git, GitHub  
+- Version Control: Git, GitHub
 
 AI Expertise:  
 - Models: Gemini, GPT-4, Mistral  

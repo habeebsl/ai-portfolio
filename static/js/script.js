@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     // DOM Elements
     const messageInput = document.getElementById("message-input");
-    const messageCont = document.getElementsByClassName("message-container");
+    const messageCont = document.querySelectorAll(".message-container");
     const suggestions = document.querySelector('.prompt-suggestions');
     const submitBtn = document.getElementById("submit-btn");
     const suggestionBoxes = document.querySelectorAll('.suggestion-box');
@@ -49,11 +49,10 @@ document.addEventListener("DOMContentLoaded", () => {
         removeErrorMessage();
         if (!navigator.onLine) {
             handleError("It seems you're offline right now. Please check your internet connection and try again.");
+            messageInput.value = message;
             return;
         }
-        if (document.querySelector(".hero-section")) {
-            removeHeroSection()
-        }
+        removeHeroSection();
         displayUserMessage(message);
         resetInput();
         setLoadingState();
@@ -71,6 +70,13 @@ document.addEventListener("DOMContentLoaded", () => {
             if (data.error) throw new Error(data.error);
             appendMessageAndScroll("AI", data.message)
         } catch (error) {
+            const userMessages = document.querySelectorAll('.user-message');
+            for (let i = userMessages.length - 1; i >= 0; i--) {
+                if (userMessages[i].textContent === message) {
+                    userMessages[i].remove();
+                    break;
+                }
+            }
             console.log(`Error: ${error}`);
             messageInput.value = message;
             handleError(error);
@@ -185,11 +191,16 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function manageHeroSection() {
-        if (heroSection) {
+        if (isDeviceWidthNotLessThan(768) && heroSection) {
+            console.log("setting overflow hidden")
             document.body.style.overflowY = 'hidden'
         } else {
             document.body.style.overflowY = 'auto'
         }
+    }
+
+    function isDeviceWidthNotLessThan(minWidth) {
+        return window.matchMedia(`(min-width: ${minWidth}px)`).matches;
     }
 
     function resetInput() {
@@ -212,12 +223,24 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function handleError(error) {
-        content.innerHTML += `<div class="error-message" id="error-message">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 15a1.5 1.5 0 1 1 1.5-1.5A1.5 1.5 0 0 1 12 17zm1-4h-2V7h2z"/>
-            </svg>
-            <span>${error}</span>
-        </div>`;
+        const scrollTop = document.documentElement.scrollTop
+        const clientHeight =  document.documentElement.clientHeight
+        const scrollHeight = document.documentElement.scrollHeight
+        let errorElement = `<div class="error-message" id="error-message">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 15a1.5 1.5 0 1 1 1.5-1.5A1.5 1.5 0 0 1 12 17zm1-4h-2V7h2z"/>
+        </svg>
+        <span>${error}</span>
+        </div>`;   
+        if (scrollTop + clientHeight >= scrollHeight){
+            content.innerHTML += errorElement;
+            requestAnimationFrame(() => {
+                window.scrollTo(0, document.body.scrollHeight)
+            })
+        } else {
+            content.innerHTML += errorElement;
+        }
+        
     }
 
     function removeErrorMessage() {
@@ -227,9 +250,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function hideSuggestions() {
         suggestions.style.display = 'none';
-        if (content.querySelector('.message-container')) {
-            content.style.paddingBottom = '150px';
-        }
+        // if (messageCont.length >= 2) {
+        //     content.style.paddingBottom = '150px';
+        // }
     }
 
     function removeHeroSection() {
@@ -298,9 +321,7 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener('resize', checkScroll);
 
     // Initialization
-    initializeTextArea(messageInput);
     manageHeroSection();
-    requestAnimationFrame(() => {
-        messageCont.length ? window.scrollTo(0, document.body.scrollHeight) : window.scrollTo(0, 0);
-    });
+    initializeTextArea(messageInput);
+    checkScroll();
 });

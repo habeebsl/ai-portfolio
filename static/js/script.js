@@ -250,9 +250,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function hideSuggestions() {
         suggestions.style.display = 'none';
-        // if (messageCont.length >= 2) {
-        //     content.style.paddingBottom = '150px';
-        // }
     }
 
     function removeHeroSection() {

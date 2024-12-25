@@ -28,10 +28,10 @@ redis_client = redis.StrictRedis(
 app.config.update(
     SECRET_KEY=secrets.token_hex(24),
     SESSION_TYPE='redis',
-    SESSION_PERMANENT=True,
+    SESSION_PERMANENT=False,
     SESSION_USE_SIGNER=True,
     SESSION_KEY_PREFIX='flask-session:',
-    PERMANENT_SESSION_LIFETIME=timedelta(hours=1),
+    # PERMANENT_SESSION_LIFETIME=timedelta(hours=1),
     SESSION_REDIS=redis_client,
     SESSION_COOKIE_SECURE=True,
     SESSION_COOKIE_HTTPONLY=True,

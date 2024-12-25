@@ -1,7 +1,5 @@
-import json
 import random
 import secrets
-from datetime import timedelta
 
 import redis
 from redis import Redis, RedisError
@@ -81,8 +79,6 @@ def update_conversation(role, content):
 def homepage():
     try:
         # Verify Redis connection
-        print(f"Redis URL: {REDIS_URL}")
-        print(f"Redis Port: {REDIS_PORT}")
         redis_client.ping()
         
         if "conversation" not in session:

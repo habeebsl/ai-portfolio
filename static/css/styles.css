@@ -448,6 +448,11 @@ code {
     body {
         overflow-y: auto;
     }
+
+    .chat-container {
+        min-height: calc(52vh - 80px);
+    }
+
     .hero-section {
         grid-template-columns: 1fr;
         text-align: center;

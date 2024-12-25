@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // DOM Elements
     const messageInput = document.getElementById("message-input");
     const messageCont = document.querySelectorAll(".message-container");
     const suggestions = document.querySelector('.prompt-suggestions');

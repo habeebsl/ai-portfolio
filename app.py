@@ -12,15 +12,18 @@ from decouple import config
 
 from model import get_response
 
-app = Flask(__name__)
+REDIS_URL = config('REDIS_URL')
+REDIS_PORT = config('REDIS_PORT')
+PASSWORD = config('REDIS_PASSWORD')
 
+app = Flask(__name__)
 app.config['SECRET_KEY']= secrets.token_hex(24)
 app.config['SESSION_TYPE'] = 'redis'
 app.config['SESSION_PERMANENT'] = False
 app.config['SESSION_USE_SIGNER'] = True
 app.config['SESSION_KEY_PREFIX'] = 'flask-session:'
-app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(hours=1)
-app.config['SESSION_REDIS'] = Redis(host='localhost', port=6379)
+app.config['SESSION_REDIS'] = redis.StrictRedis(host=REDIS_URL, port=REDIS_PORT, password=PASSWORD, ssl=True)
+# Redis(host='localhost', port=6379)
 Session(app)
 
 

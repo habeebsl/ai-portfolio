@@ -489,3 +489,19 @@ code {
         height: 50px;
     }
 }
+
+.video-wrapper {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    border-radius: 12px;
+    overflow: hidden; /* Important for border-radius to work */
+}
+
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}

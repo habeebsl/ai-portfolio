@@ -24,7 +24,28 @@ app.config['SESSION_PERMANENT'] = True
 app.config['SESSION_USE_SIGNER'] = True
 app.config['SESSION_KEY_PREFIX'] = 'flask-session:'
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(hours=1)
-app.config['SESSION_REDIS'] = redis.StrictRedis(host=REDIS_URL, port=REDIS_PORT, password=PASSWORD, ssl=True)
+app.config['SESSION_COOKIE_SECURE'] = True
+app.config['SESSION_COOKIE_HTTPONLY'] = True
+app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
+
+redis_client = redis.StrictRedis(
+    host=REDIS_URL,
+    port=REDIS_PORT,
+    password=PASSWORD,
+    ssl=True
+)
+
+app.config['SESSION_REDIS'] = redis_client
+
+try:
+    redis_client.ping()
+    print("Successfully connected to Redis")
+except redis.ConnectionError:
+    print("Failed to connect to Redis")
+
+print(f"Redis URL: {REDIS_URL}")
+print(f"Redis Port: {REDIS_PORT}")
+
 Session(app)
 
 
@@ -55,10 +76,14 @@ prompts = [
 
 
 def update_conversation(role, content):
-    conversation = session.get("conversation", [])
-    conversation.append({"role": role, "content": content})
-    session["conversation"] = conversation
-    session.modified = True
+    try:
+        conversation = session.get("conversation", [])
+        conversation.append({"role": role, "content": content})
+        session["conversation"] = conversation
+        session.modified = True
+        print(f"Updated conversation: {conversation}")
+    except Exception as e:
+        print(f"Error updating conversation: {str(e)}")
 
 @app.route("/")
 def homepage():

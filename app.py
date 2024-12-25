@@ -4,7 +4,7 @@ import secrets
 from datetime import timedelta
 
 import redis
-from redis import Redis
+from redis import Redis, RedisError
 from flask_session import Session
 
 from flask import Flask, render_template, jsonify, session, request
@@ -18,16 +18,6 @@ REDIS_URL = config('REDIS_URL')
 REDIS_PORT = config('REDIS_PORT')
 PASSWORD = config('REDIS_PASSWORD')
 
-app.config['SECRET_KEY'] = secrets.token_hex(24)
-app.config['SESSION_TYPE'] = 'redis'
-app.config['SESSION_PERMANENT'] = True
-app.config['SESSION_USE_SIGNER'] = True
-app.config['SESSION_KEY_PREFIX'] = 'flask-session:'
-app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(hours=1)
-app.config['SESSION_COOKIE_SECURE'] = True
-app.config['SESSION_COOKIE_HTTPONLY'] = True
-app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
-
 redis_client = redis.StrictRedis(
     host=REDIS_URL,
     port=REDIS_PORT,
@@ -35,16 +25,18 @@ redis_client = redis.StrictRedis(
     ssl=True
 )
 
-app.config['SESSION_REDIS'] = redis_client
-
-try:
-    redis_client.ping()
-    print("Successfully connected to Redis")
-except redis.ConnectionError:
-    print("Failed to connect to Redis")
-
-print(f"Redis URL: {REDIS_URL}")
-print(f"Redis Port: {REDIS_PORT}")
+app.config.update(
+    SECRET_KEY=secrets.token_hex(24),
+    SESSION_TYPE='redis',
+    SESSION_PERMANENT=True,
+    SESSION_USE_SIGNER=True,
+    SESSION_KEY_PREFIX='flask-session:',
+    PERMANENT_SESSION_LIFETIME=timedelta(hours=1),
+    SESSION_REDIS=redis_client,
+    SESSION_COOKIE_SECURE=True,
+    SESSION_COOKIE_HTTPONLY=True,
+    SESSION_COOKIE_SAMESITE='Lax'
+)
 
 Session(app)
 
@@ -87,11 +79,24 @@ def update_conversation(role, content):
 
 @app.route("/")
 def homepage():
-    if not "conversation" in session:
-        session["conversation"] = []
-    print(session["conversation"])
-    random_prompts = random.sample(prompts, 3)
-    return render_template("index.html", conversations=session["conversation"], prompts=random_prompts)
+    try:
+        # Verify Redis connection
+        print(f"Redis URL: {REDIS_URL}")
+        print(f"Redis Port: {REDIS_PORT}")
+        redis_client.ping()
+        
+        if "conversation" not in session:
+            session["conversation"] = []
+            session.modified = True
+        
+        random_prompts = random.sample(prompts, 3)
+        return render_template("index.html", conversations=session["conversation"], prompts=random_prompts)
+    except RedisError as e:
+        print(f"Redis Error: {str(e)}")
+        return "Redis connection failed", 500
+    except Exception as e:
+        print(f"Error: {str(e)}")
+        return "An error occurred", 500
 
 
 @app.route("/send_message", methods=["POST"])

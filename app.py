@@ -20,7 +20,7 @@ PASSWORD = config('REDIS_PASSWORD')
 
 app.config['SECRET_KEY'] = secrets.token_hex(24)
 app.config['SESSION_TYPE'] = 'redis'
-app.config['SESSION_PERMANENT'] = False
+app.config['SESSION_PERMANENT'] = True
 app.config['SESSION_USE_SIGNER'] = True
 app.config['SESSION_KEY_PREFIX'] = 'flask-session:'
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(hours=1)

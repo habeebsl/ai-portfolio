@@ -1,4 +1,5 @@
 {
+  "version": 2,
   "builds": [
     {
       "src": "app.py",
@@ -6,8 +7,9 @@
     }
   ],
   "functions": {
-    "app.py": {
-      "maxDuration": 30
+    "api/*.py": {
+      "maxDuration": 30,
+      "memory": 1024
     }
   },
   "routes": [

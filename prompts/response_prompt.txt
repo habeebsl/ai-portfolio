@@ -68,7 +68,7 @@ The backend is built using Django and Python, while the API is implemented with 
 - Achievements: Within 10 days of launching our landing page, we gained 40+ superusers, with 10 acquired through my outreach efforts.  
 - Outcome: This project highlights my teamwork, problem-solving abilities, and marketing skills.  
 
-Landing Page: www.chattersort.com  
+Landing Page: https://www.chattersort.com/ 
 GitHub: (Code available upon request)  
 
 **Skills**

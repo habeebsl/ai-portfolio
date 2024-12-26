@@ -27,7 +27,6 @@ body {
     max-width: 1000px;
     margin: 0 auto;
     padding: 24px;
-    min-height: calc(100vh - 80px);
 }
 
 [data-has-messages="true"] ~ .input-wrapper .prompt-suggestions {

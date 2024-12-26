@@ -1,5 +1,4 @@
 import random
-import secrets
 
 import redis
 from redis import Redis, RedisError
@@ -9,8 +8,6 @@ from flask import Flask, render_template, jsonify, session, request
 from decouple import config
 
 from model import get_response
-
-app = Flask(__name__)
 
 REDIS_URL = config('REDIS_URL')
 REDIS_PORT = config('REDIS_PORT')
@@ -23,21 +20,15 @@ redis_client = redis.StrictRedis(
     ssl=True
 )
 
-app.config.update(
-    SECRET_KEY=secrets.token_hex(24),
-    SESSION_TYPE='redis',
-    SESSION_PERMANENT=False,
-    SESSION_USE_SIGNER=True,
-    SESSION_KEY_PREFIX='flask-session:',
-    # PERMANENT_SESSION_LIFETIME=timedelta(hours=1),
-    SESSION_REDIS=redis_client,
-    SESSION_COOKIE_SECURE=True,
-    SESSION_COOKIE_HTTPONLY=True,
-    SESSION_COOKIE_SAMESITE='Lax'
-)
-
+app = Flask(__name__)
+app.config['SECRET_KEY'] = config('SECRET_KEY')
+app.config['SESSION_TYPE'] = 'redis'
+app.config['SESSION_PERMANENT'] = False
+app.config['SESSION_USE_SIGNER'] = True
+app.config['SESSION_KEY_PREFIX'] = 'flask-session:'
+app.config['SESSION_REDIS'] = redis_client
+# Redis(host='localhost', port=6379)
 Session(app)
-
 
 prompts = [
     "Show me your best development work",

@@ -6,6 +6,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const suggestionBoxes = document.querySelectorAll('.suggestion-box');
     const content = document.getElementById("content");
     const heroSection = document.querySelector(".hero-section");
+    const heroText = document.querySelector(".hero-text");
+    const promptEquivalent = {
+        skills: "What are your skills?", 
+        projects: "Can you provide an overview of your past projects and contributions?", 
+        experiences: "Tell me about your work history and roles",
+    };
 
     // State Variables
     let isScrolledUp = false;
@@ -290,6 +296,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     submitBtn.addEventListener("click", () => sendMessage());
+
+    heroText.querySelectorAll('span').forEach(word => {
+        word.addEventListener('click', () => {
+            sendMessage(promptEquivalent[word.textContent]);
+        })
+    });
 
     messageInput.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' && !e.shiftKey && !submitBtn.disabled) {

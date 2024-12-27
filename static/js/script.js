@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const submitBtn = document.getElementById("submit-btn");
     const suggestionBoxes = document.querySelectorAll('.suggestion-box');
     const content = document.getElementById("content");
+    const navbar = document.querySelector('.navbar');
     const heroSection = document.querySelector(".hero-section");
     const heroText = document.querySelector(".hero-text");
     const promptEquivalent = {
@@ -58,6 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
         removeHeroSection();
+        showNavbar();
         displayUserMessage(message);
         resetInput();
         setLoadingState();
@@ -257,6 +259,14 @@ document.addEventListener("DOMContentLoaded", () => {
         suggestions.style.display = 'none';
     }
 
+    function showNavbar() {
+        navbar.style.display = 'block';
+    }
+
+    function hideNavbar() {
+        navbar.style.display = 'none';
+    }
+
     function removeHeroSection() {
         if (heroSection) {
             heroSection.remove()
@@ -329,6 +339,11 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener('resize', checkScroll);
 
     // Initialization
+    if (messageCont.length > 0) {
+        showNavbar();
+    } else {
+        hideNavbar();
+    }
     manageHeroSection();
     initializeTextArea(messageInput);
     checkScroll();

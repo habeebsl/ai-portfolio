@@ -85,6 +85,14 @@ def homepage():
         print(f"Error: {str(e)}")
         return "An error occurred", 500
 
+@app.route("/contact")
+def contact_page():
+    return render_template("contact.html")
+
+@app.route("/about")
+def about_page():
+    return render_template("about.html")
+
 
 @app.route("/send_message", methods=["POST"])
 def send_message():

@@ -66,6 +66,7 @@ def update_conversation(role, content):
     except Exception as e:
         print(f"Error updating conversation: {str(e)}")
 
+
 @app.route("/")
 def homepage():
     try:
@@ -93,7 +94,6 @@ def contact_page():
 def about_page():
     return render_template("about.html")
 
-
 @app.route("/send_message", methods=["POST"])
 def send_message():
     user_message = request.json["message"]
@@ -110,7 +110,7 @@ def send_message():
         return jsonify({
             "error": "Something went wrong, please try again"
         })
-    
-        
+
+
 if __name__ == "__main__":
     app.run(debug=config('DEBUG'))

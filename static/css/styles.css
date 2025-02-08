@@ -693,7 +693,6 @@ code {
     background: linear-gradient(135deg, var(--primary-light), var(--secondary));
     -webkit-background-clip: text;
     background-clip: text;
-    color: transparent;
     text-transform: uppercase;
 }
 

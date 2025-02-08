@@ -305,7 +305,9 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    submitBtn.addEventListener("click", () => sendMessage());
+    submitBtn.addEventListener("click", async () => {
+        sendMessage()
+    });
 
     heroText.querySelectorAll('span').forEach(word => {
         word.addEventListener('click', () => {

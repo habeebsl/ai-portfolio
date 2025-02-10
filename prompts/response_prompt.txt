@@ -83,7 +83,7 @@ This project was built using HTML, CSS, TailwindCSS, JavaScript, Typescript, Mat
 
 Website: https://balance-scale-activity.vercel.app/ 
 GitHub: https://github.com/habeebsl/Balance-Scale-Activity/
-Demo Video: https://drive.google.com/file/d/1BqD23CavrVAs9YHBWfT0lBWGMyzJT89Z/
+Demo Video: https://drive.google.com/file/d/1yltd1TW-TTagoBW8HNnLlyoYeLsoQUXD/
 
 Challenges & Solutions: I documented key challenges and how I solved them here - https://github.com/habeebsl/Balance-Scale-Activity/blob/main/LEARNING.md
 Outcome: The company recognized my implementation and effort, leading to a referral at a startup. More details available on request.

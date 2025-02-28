@@ -4,7 +4,7 @@ import { useMessage } from '@/stores/messageStore'
 export const BASE_URL = import.meta.env.VITE_API_BASE
 
 const apiClient = axios.create({
-	baseURL: `http://${BASE_URL}`,
+	baseURL: `https://${BASE_URL}`,
 	headers: {
 		'Content-Type': 'application/json'
 	},
@@ -28,7 +28,7 @@ export const apiService = {
 
 export const connectWebsocket = async (token: string, message: string) => {
     const messageStore = useMessage()
-    const socket = new WebSocket(`ws://${BASE_URL}/ws?session_token=${token}`)
+    const socket = new WebSocket(`wss://${BASE_URL}/ws?session_token=${token}`)
 
     socket.addEventListener("open", async () => {
         messageStore.sending = true

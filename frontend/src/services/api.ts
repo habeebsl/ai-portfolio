@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { useMessage } from '@/stores/messageStore'
 
-export const BASE_URL = 'localhost:5000/api'
+export const BASE_URL = import.meta.env.VITE_API_BASE
 
 const apiClient = axios.create({
 	baseURL: `http://${BASE_URL}`,

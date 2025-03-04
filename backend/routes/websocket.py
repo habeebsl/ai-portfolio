@@ -14,7 +14,7 @@ ws_api = Blueprint("ws_api", __name__, url_prefix="/api")
 async def ws():
     try:
         if not current_app.config.get("REDIS_CONNECTED", False):
-            await websocket.close(1011, "Redis connection unavailable")
+            await websocket.send_json({"error", "Redis connection unavailable"})
             return
         
         session_token = websocket.args.get("session_token")
@@ -28,22 +28,28 @@ async def ws():
         redis_client = current_app.config['REDIS_CLIENT']
         redis_interface = RedisInterface(redis_client, session_token, TTL)
 
+        chat_mistral = ChatMistral()
+
         while True:
             data = await websocket.receive()
             
             if not data:
                 break
-
-            db = VectorDatabase(data)
-            chat_mistral = ChatMistral()
             
             conversation_data = await redis_interface.get_conversations()
             conversation_data.append({"role": "user", "content": data})
+
+            db = VectorDatabase(data)
             
             prompt_data = await db.get_prompt()
             assistant_response = ""
 
             async for chunk in chat_mistral.get_response(conversation_data, prompt_data):
+                if isinstance(chunk, dict):
+                    if chunk.get("error", None):
+                        await websocket.send_json(chunk["error"])
+                        return
+                
                 assistant_response += chunk
                 await websocket.send(chunk)
             
@@ -53,10 +59,10 @@ async def ws():
             ]
 
             await redis_interface.save_conversations(new_convos)
-            
             await websocket.send("__DONE__")
 
     except Exception as e:
+        await websocket.send_json({"error": str(e)})
         print(f"WebSocket error with full traceback: {traceback.format_exc()}")
     finally:
         await websocket.close(1000)

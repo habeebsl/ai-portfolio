@@ -27,4 +27,4 @@ class ChatMistral:
 
         except Exception as e:
             print(f"Error getting response: {e}")
-            yield f"Error: {str(e)}"
+            yield {"error": str(e)}

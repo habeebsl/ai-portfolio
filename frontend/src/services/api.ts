@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { useMessage } from '@/stores/messageStore'
+import { isJSON } from '@/utils/helpers'
 
 export const BASE_URL = import.meta.env.VITE_API_BASE
 
@@ -36,28 +37,31 @@ export const connectWebsocket = async (token: string, message: string) => {
     });
 
     socket.addEventListener("message", (event) => {
+        if (isJSON(event.data)) {
+            const data = JSON.parse(event.data)
+            if (data.error) {
+                console.error("Server Error: ", data.error)
+                messageStore.currentError = "Server error"
+                messageStore.showError = true
+                messageStore.sending = false
+                messageStore.removeLastMessage()
+                messageStore.resetStoreState()
+                return;
+            }
+        }
+
         if (event.data === "__DONE__") { 
-            socket.close();
+            messageStore.sending = false
+            messageStore.finishLatestAIMessage()
+            messageStore.resetStoreState()
             return;
         }
         messageStore.updateLatestAIMassage(event.data)
     });
 
-    socket.addEventListener("close", (event) => {
-        if (event.code === 1011 && event.reason === "Redis connection unavailable") {
-            messageStore.currentError = "Server error: Redis connection unavailable"
-            messageStore.showError = true
-            messageStore.sending = false
-            messageStore.resetStoreState()
-        }
-        messageStore.finishLatestAIMessage()
-        messageStore.sending = false
-        messageStore.resetStoreState()
-    })
-
     socket.addEventListener("error", (error) => {
         messageStore.removeLastMessage()
-        messageStore.currentError = "WebSocket error"
+        messageStore.currentError = "Couldn't Connect to Websocket"
         messageStore.showError = true
         messageStore.sending = false
         messageStore.resetStoreState()

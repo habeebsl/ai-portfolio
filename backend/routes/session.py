@@ -40,7 +40,6 @@ async def create_new_session():
         session_token,
         httponly=True,
         secure=secure,
-        samesite="Lax",
         max_age=TTL
     )
     return response

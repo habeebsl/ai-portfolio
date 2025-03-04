@@ -10,7 +10,7 @@ import { apiService, connectWebsocket } from '@/services/api';
 const messageStore = useMessage()
 const chatWrapperRef = ref(null)
 const threshold = 200
-const isNearBottom = ref(false)
+const isNearBottom = ref(true)
 
 const retrieveSessionID = async () => {
     try {
@@ -53,10 +53,9 @@ watchEffect(async () => {
 })
 
 watch(
-  () => messageStore.conversations.length,
-  async (newLength) => {
-    if (newLength > 0) {
-      await nextTick();
+  () => messageStore.conversations,
+  async (newVal) => {
+    if (newVal.length > 0) {
       if (chatWrapperRef.value) {
         chatWrapperRef.value.addEventListener('scroll', checkScroll)
       }
@@ -65,11 +64,19 @@ watch(
   }
 );
 
+watch(
+    () => messageStore.conversations[messageStore.conversations.length-1],
+    async () => {
+        await nextTick()
+        checkScroll()
+    }   
+)
+
 onMounted(async () => {
-  await nextTick();
   if (chatWrapperRef.value && messageStore.conversations.length > 0) {
     chatWrapperRef.value.addEventListener('scroll', checkScroll);
   }
+  checkScroll()
 });
 
 onUnmounted(() => {

@@ -19,8 +19,9 @@ const retrieveSessionID = async () => {
         if (!response.data.error) {
             return response.data.message;
         }
-
+        console.log("No session Id, Creating new one")
         const newResponse = await apiService.createSessionId();
+        console.log(newResponse.data.message)
         return newResponse.data.message;
     } catch (error) {
         console.error("Session retrieval error:", error);
@@ -32,12 +33,11 @@ const retrieveSessionID = async () => {
 
 const checkScroll = () => {
     if (chatWrapperRef.value) {
-        const current = chatWrapperRef.value.scrollHeight - chatWrapperRef.value.scrollTop - chatWrapperRef.value.clientHeight;
-        console.log(current)
-        isNearBottom.value = current <= threshold;
+        const { scrollTop, scrollHeight, clientHeight } = chatWrapperRef.value;
+        const distanceFromBottom = scrollHeight - scrollTop - clientHeight;
+        isNearBottom.value = distanceFromBottom <= threshold;
     }
 };
-
 const scrollToBottom = () => {
     chatWrapperRef.value.scrollTop = chatWrapperRef.value.scrollHeight;
 }
@@ -53,23 +53,27 @@ watchEffect(async () => {
 })
 
 watch(
-  () => messageStore.conversations,
-  async (newVal) => {
-    if (newVal.length > 0) {
-      if (chatWrapperRef.value) {
-        chatWrapperRef.value.addEventListener('scroll', checkScroll)
-      }
-      checkScroll()
-    }
-  }
-);
+    () => messageStore.conversations,
+    async (newConversations) => {
+        if (newConversations.length > 0) {
+            if (chatWrapperRef.value) {
+                chatWrapperRef.value.addEventListener('scroll', checkScroll);
+            }
+            await nextTick();
+            checkScroll();
+        }
+    },
+    { immediate: true }
+)
 
 watch(
-    () => messageStore.conversations[messageStore.conversations.length-1],
-    async () => {
-        await nextTick()
-        checkScroll()
-    }   
+    () => messageStore.conversations[messageStore.conversations.length - 1],
+    async (latestMessage) => {
+        if (latestMessage && latestMessage.showCursor) {
+            await nextTick()     
+            checkScroll()
+        }
+    }
 )
 
 onMounted(async () => {

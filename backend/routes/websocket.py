@@ -65,4 +65,8 @@ async def ws():
         await websocket.send_json({"error": str(e)})
         print(f"WebSocket error with full traceback: {traceback.format_exc()}")
     finally:
-        await websocket.close(1000)
+        try:
+            if websocket.closed is False:
+                await websocket.close(1000)
+        except Exception as e:
+            print(f"Error while closing WebSocket: {e}")

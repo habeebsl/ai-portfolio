@@ -39,6 +39,7 @@ async def create_new_session():
         "session_token",
         session_token,
         httponly=True,
+        samesite="Lax",
         secure=secure,
         max_age=TTL,
         domain=os.getenv("FRONTEND_DOMAIN", None)

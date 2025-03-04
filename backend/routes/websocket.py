@@ -47,7 +47,7 @@ async def ws():
             async for chunk in chat_mistral.get_response(conversation_data, prompt_data):
                 if isinstance(chunk, dict):
                     if chunk.get("error", None):
-                        await websocket.send_json(chunk["error"])
+                        await websocket.send_json(chunk)
                         return
                 
                 assistant_response += chunk

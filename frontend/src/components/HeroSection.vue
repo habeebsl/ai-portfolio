@@ -28,6 +28,8 @@ import VisualElement from '@/components/VisualElement.vue';
         text-align: center;
         gap: 20px;
         margin: 30px auto 20px;
+        max-height: calc(100vh - 100px);
+        overflow-y: auto;
     }
 }
 </style>

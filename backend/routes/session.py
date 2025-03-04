@@ -29,7 +29,6 @@ async def get_session_data():
         print(f"Error: {str(e)}")
         return "An error occurred", 500
 
-
 @api.route('/session/new', methods=['GET'])
 async def create_new_session():
     secure=(os.getenv("SECURE", "false").lower() == "true")
@@ -54,3 +53,7 @@ async def validate_session():
         return jsonify({"error": "Unauthorized"})
 
     return jsonify({"message": session_token})
+
+@api.route('/health', methods=['GET'])
+async def health():
+    return jsonify({"message": "Cronjob executed successfully"}), 200

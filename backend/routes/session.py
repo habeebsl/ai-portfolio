@@ -40,7 +40,8 @@ async def create_new_session():
         session_token,
         httponly=True,
         secure=secure,
-        max_age=TTL
+        max_age=TTL,
+        domain=os.getenv("FRONTEND_DOMAIN", None)
     )
     return response
 

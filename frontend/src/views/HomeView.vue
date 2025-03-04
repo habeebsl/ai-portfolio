@@ -40,6 +40,7 @@ const checkScroll = () => {
 };
 const scrollToBottom = () => {
     chatWrapperRef.value.scrollTop = chatWrapperRef.value.scrollHeight;
+    isNearBottom.value = true
 }
 
 watchEffect(async () => {

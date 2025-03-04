@@ -66,7 +66,6 @@ async def ws():
         print(f"WebSocket error with full traceback: {traceback.format_exc()}")
     finally:
         try:
-            if websocket.closed is False:
-                await websocket.close(1000)
+            await websocket.close(1000)
         except Exception as e:
             print(f"Error while closing WebSocket: {e}")

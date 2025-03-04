@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 from quart import Blueprint, current_app, websocket
 from utils.redis_utils import RedisInterface
 from utils.db_utils import VectorDatabase
-from utils.model_utils import ChatMistral
+from utils.model_utils import ChatOpenai
 from utils.constants import TTL
 
 load_dotenv()
@@ -28,7 +28,7 @@ async def ws():
         redis_client = current_app.config['REDIS_CLIENT']
         redis_interface = RedisInterface(redis_client, session_token, TTL)
 
-        chat_mistral = ChatMistral()
+        chat_openai = ChatOpenai()
 
         while True:
             data = await websocket.receive()
@@ -44,7 +44,7 @@ async def ws():
             prompt_data = await db.get_prompt()
             assistant_response = ""
 
-            async for chunk in chat_mistral.get_response(conversation_data, prompt_data):
+            async for chunk in chat_openai.get_response(conversation_data, prompt_data):
                 if isinstance(chunk, dict):
                     if chunk.get("error", None):
                         await websocket.send_json(chunk)

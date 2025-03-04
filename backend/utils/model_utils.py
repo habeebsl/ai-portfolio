@@ -1,14 +1,14 @@
 import os
 from dotenv import load_dotenv
-from mistralai import Mistral
-from prompts.mistral_prompt import system_prompt
+from openai import OpenAI
+from prompts.openai_prompt import system_prompt
 
 load_dotenv()
 
-class ChatMistral:
+class ChatOpenai:
     def __init__(self):
-        self.model = "mistral-large-latest"
-        self.client = Mistral(api_key=os.getenv("API_KEY"))
+        self.model = "gpt-4o"
+        self.client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
     async def get_response(self, conversation: list, data: str):
         messages = [
@@ -17,13 +17,15 @@ class ChatMistral:
         ]
 
         try:
-            stream_response = self.client.chat.stream(
+            stream = self.client.chat.completions.create(
                 model = self.model,
-                messages = messages
+                messages = messages,
+                stream=True,
             )
 
-            for chunk in stream_response:
-                yield chunk.data.choices[0].delta.content
+            for chunk in stream:
+                if chunk.choices[0].delta.content is not None:
+                    yield chunk.choices[0].delta.content
 
         except Exception as e:
             print(f"Error getting response: {e}")

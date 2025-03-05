@@ -67,6 +67,7 @@ watchEffect(async () => {
     if (userMessage && messageStore.sendMessage) {
         messageStore.appendMessage("user", userMessage)
         messageStore.appendMessage("assistant", "", true)
+        messageStore.sending = true
         const session_id = await retrieveSessionID()
         connectWebsocket(session_id, userMessage)
     }

@@ -31,6 +31,7 @@ class VectorDatabase:
         "keypoint": "keypoint: Text analysis and information extraction tool",
         "chattersort": "chattersort: AI chatbot conversation management extension", 
         "activity_builder": "activity builder: Interactive math learning game",
+        "ai_translator": "Multilingual translator with audio transcription and audio playback for translation",
         "work_experience": "experience: Work history at Chattersort and Google DSC",
         "education": "education: Medical education at Igbinedion University",
         "projects": "projects: Overview of major software development projects"

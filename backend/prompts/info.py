@@ -18,6 +18,7 @@ GitHub: (Code available upon request)
 
 keypoint_project = \
 """
+Keypoint:
 Keypoint is a web app that extracts and highlights the most critical information from a text. It identifies key sentences, paragraphs, and terms, and provides Wikipedia-based tooltips for important words, allowing users to access more information instantly. The app also includes a redirect link to the relevant Wikipedia page for further exploration.  
 
 This project was built using Python, Django, HTML, CSS, and JavaScript, leveraging Google’s Gemini-1.5-Pro model for its cutting-edge NLP capabilities. I also used PostgreSQL for session-based storage.  
@@ -34,6 +35,7 @@ Demo Video: https://drive.google.com/file/d/1qWoG1yyhYIEKWkIdAHjFYKooixFEyzP4/pr
 
 therapist_project = \
 """
+AI Therapist:
 This is one of my favorite projects—a web-based AI therapist built around Cognitive Behavioral Therapy (CBT) principles. The app mimics a real therapy session by engaging users through the three key stages of CBT: initial, middle, and final. Each stage is tailored with handcrafted prompts designed to address specific therapeutic goals.  
 
 The app was built using Python, Flask, HTML, CSS, and JavaScript, with Redis for managing chat session storage. I chose Mistral AI's mistral-large-2411 model for its advanced capabilities, ensuring an empathetic and effective user experience.  
@@ -46,6 +48,23 @@ I created this project to provide an affordable alternative to therapy for indiv
 Website: https://ai-therapist-rho.vercel.app/ 
 GitHub: https://github.com/habeebsl/ai-therapist
 Demo Video: https://drive.google.com/file/d/1jtoB3mc04WJb-5uFgAFGu3TPy0dHz618/preview
+"""
+
+translator_project = \
+"""
+AI Translator:
+This is my latest project, offering multilingual real-time transcription of audio data, as well as real-time translation into multiple languages. Additionally, users can play back the translated text in a natural and intuitive human-like voice.
+
+The project is built using HTML, CSS, JavaScript, TypeScript, Vue, Pinia, and FastAPI. It leverages:
+
+- OpenAI's Whisper-1 model for audio transcription
+- OpenAI's TTS-1 model for generating speech from translated text
+- GPT-4o Mini for verifying transcribed text
+- DeepL for text translation
+
+Website: https://ai-translator-beryl.vercel.app/
+Github: https://github.com/habeebsl/ai-translator
+Demo Video: https://www.loom.com/embed/ab7bb5645b234762b2abd23d1cb12c6b?sid=dee405ab-fa36-4bec-bdc2-575a5df74aa4
 """
 
 activity_builder_project = \
@@ -76,7 +95,9 @@ documents = {
     
     "activity_builder": activity_builder_project,
 
-    "projects": f"**Projects**\n{keypoint_project}\n\n{chattersort_project}\n\n{therapist_project}\n\n{activity_builder_project}",
+    "ai_translator": translator_project,
+
+    "projects": f"**Projects**\n{keypoint_project}\n\n{chattersort_project}\n\n{therapist_project}\n\n{activity_builder_project}\n\n{translator_project}",
 
     "education": """
     **Education**

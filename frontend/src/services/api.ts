@@ -32,7 +32,6 @@ export const connectWebsocket = async (token: string, message: string) => {
     const socket = new WebSocket(`wss://${BASE_URL}/ws?session_token=${token}`)
 
     socket.addEventListener("open", async () => {
-        messageStore.sending = true
         socket.send(message);
     });
 

@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, watchEffect, ref, onUnmounted, nextTick, watch } from 'vue';
+import { onMounted, ref, onUnmounted, nextTick, computed, watchEffect, watch } from 'vue';
 import HeroSection from '@/components/HeroSection.vue';
 import ChatContainer from '@/components/ChatContainer.vue';
 import InputWrapper from '@/components/InputWrapper.vue';
@@ -9,8 +9,39 @@ import { apiService, connectWebsocket } from '@/services/api';
 
 const messageStore = useMessage()
 const chatWrapperRef = ref(null)
-const threshold = 200
-const isNearBottom = ref(true)
+const scrollTop = ref(0)
+const scrollHeight = ref(0)
+const clientHeight = ref(0)
+
+const isNearBottom = computed(() => {
+    console.log('Checking isNearBottom', {
+        scrollTop: scrollTop.value,
+        scrollHeight: scrollHeight.value,
+        clientHeight: clientHeight.value
+    });
+    
+    const threshold = 200;
+    return scrollHeight.value - scrollTop.value - clientHeight.value <= threshold;
+});
+
+const updateScrollMetrics = () => {
+  if (chatWrapperRef.value) {
+    scrollTop.value = chatWrapperRef.value.scrollTop;
+    scrollHeight.value = chatWrapperRef.value.scrollHeight;
+    clientHeight.value = chatWrapperRef.value.clientHeight;
+  }
+};
+
+const scrollToBottom = () => {
+    chatWrapperRef.value.scrollTop = chatWrapperRef.value.scrollHeight;
+}
+
+onMounted(() => {
+    if (chatWrapperRef.value) {
+        scrollToBottom()
+        updateScrollMetrics();
+    }
+});
 
 const retrieveSessionID = async () => {
     try {
@@ -31,17 +62,6 @@ const retrieveSessionID = async () => {
     }
 };
 
-const checkScroll = () => {
-    if (chatWrapperRef.value) {
-        const { scrollTop, scrollHeight, clientHeight } = chatWrapperRef.value;
-        const distanceFromBottom = scrollHeight - scrollTop - clientHeight;
-        isNearBottom.value = distanceFromBottom <= threshold;
-    }
-};
-const scrollToBottom = () => {
-    chatWrapperRef.value.scrollTop = chatWrapperRef.value.scrollHeight;
-}
-
 watchEffect(async () => {
     const userMessage = messageStore.currentUserMessage
     if (userMessage && messageStore.sendMessage) {
@@ -53,47 +73,19 @@ watchEffect(async () => {
 })
 
 watch(
-    () => messageStore.conversations,
-    async (newConversations) => {
-        if (newConversations.length > 0) {
-            if (chatWrapperRef.value) {
-                chatWrapperRef.value.addEventListener('scroll', checkScroll);
-            }
-            await nextTick();
-            checkScroll();
-        }
-    },
-    { immediate: true }
-)
-
-watch(
     () => messageStore.conversations[messageStore.conversations.length - 1],
     async (latestMessage) => {
         if (latestMessage && latestMessage.showCursor) {
-            await nextTick()     
-            checkScroll()
+            updateScrollMetrics()
         }
     }
 )
-
-onMounted(async () => {
-  if (chatWrapperRef.value && messageStore.conversations.length > 0) {
-    chatWrapperRef.value.addEventListener('scroll', checkScroll);
-  }
-  checkScroll()
-});
-
-onUnmounted(() => {
-    if (chatWrapperRef.value) {
-        chatWrapperRef.value.removeEventListener('scroll', checkScroll);
-    }
-});
 </script>
 
 <template>
     <div class="app-container">
         <HeroSection v-if="messageStore.conversations.length === 0" />
-        <div v-else class="chat-wrapper" ref="chatWrapperRef">
+        <div v-else class="chat-wrapper" ref="chatWrapperRef" @scroll="updateScrollMetrics">
             <ChatContainer />
             <ScrollButton @scroll="scrollToBottom" :visible="!isNearBottom" />
         </div>

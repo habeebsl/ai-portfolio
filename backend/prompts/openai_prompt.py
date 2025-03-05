@@ -61,6 +61,7 @@ def system_prompt(data: str):
     </div>
     - When referencing my projects, use `skill` to list specific skills used.
     - Keep the format clean and simple to maintain readability.
+    - Keep your responses clear and free from buzz words
 
     
     ### Information About Me:

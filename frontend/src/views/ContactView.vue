@@ -88,10 +88,6 @@ import ContactCard from '@/components/ContactCard.vue';
 }
 
 @media (max-width: 768px) {
-    .contact-page {
-        margin: 19px auto;
-    }
-
     .contact-header h1 {
         font-size: 36px;
     }

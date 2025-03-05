@@ -68,4 +68,4 @@ async def ws():
         try:
             await websocket.close(1000)
         except Exception as e:
-            print(f"Error while closing WebSocket: {e}")
+            pass

@@ -83,7 +83,6 @@ body {
     }
     
     .about-page {
-        margin: 0px auto;
         margin-bottom: 40px;
     }
 

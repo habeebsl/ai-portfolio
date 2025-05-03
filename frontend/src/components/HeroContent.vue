@@ -27,7 +27,7 @@ const handleClick = (event) => {
         <div class="role">Software Engineer | AI Solutions Developer</div>
         <h1>Experience my journey through <span class="gradient-text">interactive AI</span></h1>
         <p class="hero-text" @click="handleClick">
-            Ask anything about my <span>skills</span>, <span>projects</span>, and <span>experiences</span>
+            Ask anything about my <span>skills</span>, <span>projects</span>, and <span>experiences</span>—or check out the <span><router-link to="/about" class="subtle-link">about page</router-link></span> for the TL;DR version
         </p>
         <HeroButtons />
     </div>
@@ -95,6 +95,40 @@ const handleClick = (event) => {
 }
 
 .hero-text span:hover {
+    background: linear-gradient(135deg, var(--primary-light), var(--accent));
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+.subtle-link {
+    text-decoration: none;
+    color: transparent;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    font-weight: 600;
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+    transition: color 0.3s ease, background 0.3s ease;
+}
+
+.subtle-link span::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(135deg, var(--primary-light), var(--secondary));
+    transition: width 0.3s ease;
+}
+
+.subtle-link span:hover::after {
+    width: 100%;
+}
+
+.subtle-link span:hover {
     background: linear-gradient(135deg, var(--primary-light), var(--accent));
     -webkit-background-clip: text;
     background-clip: text;

@@ -108,10 +108,15 @@ documents = {
 
     "work_experience": """
     **Work Experience**
-    1. Chattersort
+    1. Comini Learning 
+    - Role: Software Developer Intern 
+    - Achievements: Building Interesting games to make learning more interactive and fun for children 
+    - Duration: 2025–present  
+
+    2. Chattersort
     - Role: Backend Developer, Prompt Engineer, Chrome Extension Developer  
     - Achievements: Secured 10+ power users by implementing innovative AI solutions.  
-    - Duration: 2023–Present  
+    - Duration: 2023–2024 
 
     2. Google Developer Student Club  
     - Role: Python Instructor  

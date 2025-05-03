@@ -1,6 +1,6 @@
 <script setup>
 import { onMounted, ref } from 'vue';
-import { RouterView } from 'vue-router'
+import { RouterView, useRoute } from 'vue-router'
 import NavBar from '@/components/NavBar.vue';
 import LoadingScreen from './components/LoadingScreen.vue';
 import { useMessage } from './stores/messageStore';
@@ -9,6 +9,8 @@ import { apiService } from './services/api';
 const messageStore = useMessage()
 const isLoading = ref(false)
 const progress = ref(0)
+const route = useRoute()
+
 
 onMounted(async () => {
     try {
@@ -32,7 +34,7 @@ onMounted(async () => {
 <template>
   <LoadingScreen v-if="isLoading" :progress="progress" />
   <div v-else>
-      <NavBar v-if="messageStore.conversations.length > 0" />
+      <NavBar v-if="messageStore.conversations.length > 0 || route.path !== '/'" />
       <RouterView />
   </div>
 </template>

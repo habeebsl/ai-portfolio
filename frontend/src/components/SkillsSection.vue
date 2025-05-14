@@ -23,6 +23,8 @@ import AWS from './skills/AWS.vue';
 import Langchain from './skills/Langchain.vue';
 import Firebase from './skills/Firebase.vue';
 import Supabase from './skills/Supabase.vue';
+import Next from './skills/Next.vue';
+import GraphQL from './skills/GraphQL.vue';
 </script>
 
 <template>
@@ -59,6 +61,10 @@ import Supabase from './skills/Supabase.vue';
             <SkillCard class="fade-in">
                 <React className="skill-svg" />
                 React
+            </SkillCard>
+            <SkillCard class="fade-in">
+                <Next className="skill-svg" />
+                Next.Js
             </SkillCard>
             <SkillCard class="fade-in">
                 <Pinia className="skill-svg" />
@@ -111,6 +117,10 @@ import Supabase from './skills/Supabase.vue';
             <SkillCard class="fade-in">
                 <Langchain className="skill-svg" />
                 Langchain
+            </SkillCard>
+            <SkillCard class="fade-in">
+                <GraphQL className="skill-svg" />
+                GraphQL
             </SkillCard>
             <SkillCard class="fade-in">
                 <Firebase className="skill-svg" />

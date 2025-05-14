@@ -67,6 +67,37 @@ Github: https://github.com/habeebsl/ai-translator
 Demo Video: https://www.loom.com/embed/ab7bb5645b234762b2abd23d1cb12c6b?sid=dee405ab-fa36-4bec-bdc2-575a5df74aa4
 """
 
+marketer_project = \
+"""
+Email Marketing Automation Tool:
+There where a variety of algorithms to choose from, including the UCB and Epsilon-greedy algorithms. They were also good options but they had some randomizing factor to them, which hinders the self-learning algorithm’s progression and balance between exploration & exploitation.
+
+The Thompson Sampling algorithm perfectly balances these aspects, and it’s design allows the model to get better in the long run , hence why I selected it.
+
+My Solution: The model selects the email template to send as well as the ICP to send it to, based on data given.
+
+Template and ICP Generation
+We’re making use of a GPT model, coupled with a few prompts to generate a number of templates and ICPs. I added this to make the process feel fully automated and easy to setup.
+
+How Everything Would Work
+Ideally we would be making use of an API service like apollo.io to get these ICPs and their data. We’ll be sending a specified number of emails everyday automatically, and for the learning aspect:
+
+A model we’ll be in charge of generating new email templates, updating existing templates and updating the ICPs, depending on the overall metrics collected every 3-4 days.
+We count link clicks as successes and no clicks as failures.
+Other Ideas
+We could add email opens as a metric, but I ultimately decided not to because to do that we would need to add an invisible image to the email in order to track the opens. The problem is that email provider platforms like Gmail and the like, make the user go through an extra step when opening the emails, which makes the email seem suspicious and untrustworthy, hence why I did not include it.
+
+Tech Stack
+Frontend: React + Typescript + Zustand + Vite
+Backend: FastAPI + Python
+Database: PostgreSQL
+Model: GPT 4.1
+Algorithm: Thompson Sampling
+
+Github: https://github.com/habeebsl/email-marketer
+Demo Video: https://www.loom.com/embed/2d2f23e526424e10a144333c75de1ff1?sid=c340343b-4b55-493b-b99a-17ee9d81b696
+"""
+
 activity_builder_project = \
 """
 Interactive Math Learning Game (Built for a hiring challenge, completed in 2 weeks)
@@ -85,7 +116,7 @@ Outcome: The company recognized my implementation and effort, leading to a refer
 documents = {
     "personal_info": "**Personal Info**\nMy name is Habeeb Salami, and I am an web developer with AI expertise with over 2 years of experience, based in Edo State, Nigeria. I specialize in building innovative projects and have a keen interest in AI. I enjoy solving complex problems and integrating AI into products to foster groundbreaking innovation. My future goals include leveraging AI to boost client product traction and creating transformative solutions that redefine industries.",
 
-    "technical_skills": "**Skills**\nC, Python, JavaScript, Typescript, SQL, HTML, CSS, Node.js, Express.js, Vue.js, React.js, Matter.js, Pinia, Vite, TailwindCSS, Flask, Django, FastAPI, SQLAlchemy, Pytest, Postman, Redis, PostgreSQL, MySQL, SQLite, Docker, AWS, Pinecone, RAG, Langchain, FAISS, HayStack, Render, Vercel, Heroku, Tembo, Supabase, Railway, Firebase, Git, GitHub, Gemini, GPT-4, Mistral, Prompt Engineering, Robotic Process Automation, Web Scraping, Backend Development",
+    "technical_skills": "**Skills**\nC, Python, JavaScript, Typescript, SQL, HTML, CSS, Node.js, Express.js, Vue.js, React.js, Next.js, GraphQL, Matter.js, Pinia, Vite, TailwindCSS, Flask, Django, FastAPI, SQLAlchemy, Pytest, Postman, Redis, PostgreSQL, MySQL, SQLite, Docker, AWS, Pinecone, RAG, Langchain, FAISS, HayStack, Render, Vercel, Heroku, Tembo, Supabase, Railway, Firebase, Git, GitHub, Gemini, GPT-4, Mistral, Prompt Engineering, Robotic Process Automation, Web Scraping, Backend Development",
 
     "ai_therapist": therapist_project,
 
@@ -96,8 +127,10 @@ documents = {
     "activity_builder": activity_builder_project,
 
     "ai_translator": translator_project,
+    
+    "email_marketer": marketer_project,
 
-    "projects": f"**Projects**\n{keypoint_project}\n\n{chattersort_project}\n\n{therapist_project}\n\n{activity_builder_project}\n\n{translator_project}",
+    "projects": f"**Projects**\n{keypoint_project}\n\n{chattersort_project}\n\n{therapist_project}\n\n{activity_builder_project}\n\n{translator_project}\n\n{marketer_project}",
 
     "education": """
     **Education**

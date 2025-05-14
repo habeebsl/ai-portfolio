@@ -100,7 +100,6 @@ watch(
     flex-direction: column;
     height: 100vh;
     width: 100%;
-    overflow: hidden;
 }
 
 .chat-wrapper {

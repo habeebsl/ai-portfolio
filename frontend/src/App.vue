@@ -11,7 +11,6 @@ const isLoading = ref(false)
 const progress = ref(0)
 const route = useRoute()
 
-
 onMounted(async () => {
     try {
         progress.value = 20
@@ -32,11 +31,13 @@ onMounted(async () => {
 </script>
 
 <template>
-  <LoadingScreen v-if="isLoading" :progress="progress" />
-  <div v-else>
-      <NavBar v-if="messageStore.conversations.length > 0 || route.path !== '/'" />
-      <RouterView />
-  </div>
+    <div>
+        <LoadingScreen v-if="isLoading" :progress="progress" />
+        <div v-else>
+            <NavBar v-if="messageStore.conversations.length > 0 || route.path !== '/'" />
+            <RouterView />
+        </div>
+    </div>
 </template>
 
 <style scoped>

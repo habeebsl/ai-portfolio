@@ -40,8 +40,7 @@ const messageStore = useMessage()
     -webkit-backdrop-filter: blur(28px);
     z-index: 100;
     box-shadow: 0 -10px 20px rgba(0, 0, 0, 0.1);
-    padding: 24px 0;
-    margin-top: auto;
+    padding-top: 24px;
 }
 
 .input-content {

@@ -173,10 +173,6 @@ onMounted(() => {
 }
 
 @media (max-width: 768px) {
-    body {
-        overflow-y: auto;
-    }
-
     .about-content h1 {
         font-size: 36px;
     }

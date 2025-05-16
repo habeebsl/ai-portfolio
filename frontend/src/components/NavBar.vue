@@ -30,7 +30,7 @@ import { RouterLink } from 'vue-router';
           Contact
         </RouterLink>
         <a 
-          href="https://drive.usercontent.google.com/u/0/uc?id=1t1axFRoqwPr6Ca5KDT74NqyqsFzZyf96&export=download" 
+          href="https://drive.usercontent.google.com/u/0/uc?id=1gbS64L1dpQm67Xz6yZoaK6Yy9SfCpK18&export=download" 
           class="nav-item" 
           download
         >

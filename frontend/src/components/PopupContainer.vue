@@ -68,4 +68,15 @@ const emit = defineEmits(['close'])
   background: rgba(255, 255, 255, 0.2);
   transform: scale(1.1);
 }
+
+@media (max-width: 768px) {
+  .video-container {
+    width: 80%;
+  }
+
+  .close-button {
+    top: -55px;
+    right: -20px;
+  }
+}
 </style>

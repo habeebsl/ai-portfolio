@@ -19,6 +19,13 @@ const experiences = [
       "Building Interesting games to make learning more interactive and fun for children",
   },
   {
+    title: "Backend Engineer",
+    company: "Chattersort",
+    duration: "2023 - 2024",
+    description: 
+        "Secured 40+ power users, built a secure and maintainable backend, developed chrome extension"
+  },
+  {
     title: "Python Instructor",
     company: "Google Developer Student Club",
     duration: "2022 - 2023",
@@ -31,8 +38,9 @@ const education = [
   {
     title: "Bachelor of Science in Computer Science",
     subtitle: "Igbinedion University, Nigeria",
-    duration: "2021 - 2026",
-    description: "Notable coursework includes Data Structures, Algorithms, Database Systems, and Software Engineering. Maintained a 4.5 GPA.",
+    duration: "2021",
+    description: 
+        "Notable coursework includes Data Structures, Algorithms, Database Systems, and Software Engineering. Maintained a 4.5 GPA.",
   }
 ];
 

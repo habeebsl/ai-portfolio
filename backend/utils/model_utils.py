@@ -7,7 +7,7 @@ load_dotenv()
 
 class ChatOpenai:
     def __init__(self):
-        self.model = "o4-mini"
+        self.model = "gpt-4o-mini"
         self.client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
     async def get_response(self, conversation: list, data: str):

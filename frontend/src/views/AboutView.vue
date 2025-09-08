@@ -14,7 +14,7 @@ const experiences = [
   {
     title: "Software Engineer Intern",
     company: "Comini Learning",
-    duration: "2025 - Present",
+    duration: "2025 - May",
     description:
       "Building Interesting games to make learning more interactive and fun for children",
   },

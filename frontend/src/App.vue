@@ -31,9 +31,9 @@ onMounted(async () => {
 </script>
 
 <template>
-    <div>
+    <div class="app-root">
         <LoadingScreen v-if="isLoading" :progress="progress" />
-        <div v-else>
+        <div v-else class="app-content">
             <NavBar v-if="messageStore.conversations.length > 0 || route.path !== '/'" />
             <RouterView />
         </div>
@@ -41,4 +41,16 @@ onMounted(async () => {
 </template>
 
 <style scoped>
+.app-root {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.app-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
 </style>

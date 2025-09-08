@@ -24,10 +24,7 @@ const messageStore = useMessage()
 
 <style scoped>
 .input-wrapper {
-    position: sticky;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    flex-shrink: 0; /* Prevent shrinking */
     width: 100%;
     display: flex;
     justify-content: center;
@@ -40,12 +37,31 @@ const messageStore = useMessage()
     -webkit-backdrop-filter: blur(28px);
     z-index: 100;
     box-shadow: 0 -10px 20px rgba(0, 0, 0, 0.1);
-    padding-top: 5px;
-    padding-bottom: 20px;
+    padding: 20px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .input-content {
     max-width: 1000px;
     width: calc(100% - 48px);
+}
+
+/* Mobile specific fixes */
+@media (max-width: 768px) {
+    .input-wrapper {
+        padding: 16px 0 max(16px, env(safe-area-inset-bottom)); /* Respect safe area */
+        position: relative; /* Avoid fixed positioning issues on mobile */
+    }
+    
+    .input-content {
+        width: calc(100% - 32px);
+    }
+}
+
+/* iOS Safari specific fixes */
+@supports (-webkit-touch-callout: none) {
+    .input-wrapper {
+        padding-bottom: max(20px, env(safe-area-inset-bottom));
+    }
 }
 </style>

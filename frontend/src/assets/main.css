@@ -1,14 +1,23 @@
 @import '@/assets/base.css';
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&display=swap');
 
+html, body, #app {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Prevent document scroll */
+}
 
 body {
-    padding-bottom: 0;
     background: var(--background);
     color: var(--text);
     font-family: 'Space Grotesk', sans-serif;
     line-height: 1.6;
-    margin: 0;
+}
+
+#app {
+    display: flex;
+    flex-direction: column;
 }
 
 code {
@@ -56,8 +65,14 @@ code {
 }
 
 @media (max-width: 768px) {
+    html, body, #app {
+        height: 100vh;
+        height: 100dvh; /* Dynamic viewport height */
+    }
+    
     body {
-        overflow-y: auto;
+        overflow: hidden; /* Prevent bounce scrolling on iOS */
+        -webkit-overflow-scrolling: touch;
     }
 }
 

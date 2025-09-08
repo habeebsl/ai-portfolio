@@ -85,10 +85,12 @@ watch(
 
 <template>
     <div class="app-container">
-        <HeroSection v-if="messageStore.conversations.length === 0" />
-        <div v-else class="chat-wrapper" ref="chatWrapperRef" @scroll="updateScrollMetrics">
-            <ChatContainer />
-            <ScrollButton @scroll="scrollToBottom" :visible="!isNearBottom" />
+        <div class="content-area">
+            <HeroSection v-if="messageStore.conversations.length === 0" />
+            <div v-else class="chat-wrapper" ref="chatWrapperRef" @scroll="updateScrollMetrics">
+                <ChatContainer />
+                <ScrollButton @scroll="scrollToBottom" :visible="!isNearBottom" />
+            </div>
         </div>
         <InputWrapper />
     </div>
@@ -98,13 +100,42 @@ watch(
 .app-container {
     display: flex;
     flex-direction: column;
+    height: 100vh;
+    height: 100dvh; /* Dynamic viewport height for mobile */
     width: 100%;
+    overflow: hidden;
+}
+
+.content-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    min-height: 0; /* Important for flex child to shrink */
 }
 
 .chat-wrapper {
-    flex-grow: 1;
-    width: 100%;
+    flex: 1;
     overflow-y: auto;
     scroll-behavior: smooth;
+    padding-bottom: 20px; /* Space before input */
+}
+
+/* Ensure proper mobile viewport handling */
+@supports (height: 100dvh) {
+    .app-container {
+        height: 100dvh;
+    }
+}
+
+@media (max-width: 768px) {
+    .app-container {
+        height: 100vh;
+        height: 100dvh;
+    }
+    
+    .chat-wrapper {
+        padding-bottom: 10px;
+    }
 }
 </style>

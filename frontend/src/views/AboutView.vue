@@ -131,6 +131,7 @@ onMounted(() => {
     margin-top: 70px;
     padding: 0 24px;
     margin-bottom: 100px;
+    min-height: calc(100vh - 140px); /* Ensure minimum height for proper scrolling */
 }
 
 .about-content h1 {
@@ -181,6 +182,12 @@ onMounted(() => {
 }
 
 @media (max-width: 768px) {
+    .about-page {
+        margin-top: 60px;
+        padding: 0 16px;
+        gap: 48px;
+    }
+
     .about-content h1 {
         font-size: 36px;
     }

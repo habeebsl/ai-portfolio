@@ -5,7 +5,15 @@ html, body, #app {
     height: 100%;
     margin: 0;
     padding: 0;
-    overflow: hidden; /* Prevent document scroll */
+}
+
+/* Prevent scroll only on home page (chat interface) */
+body.no-scroll {
+    overflow: hidden;
+}
+
+#app {
+    overflow: auto; /* Allow scroll by default */
 }
 
 body {
@@ -70,8 +78,8 @@ code {
         height: 100dvh; /* Dynamic viewport height */
     }
     
-    body {
-        overflow: hidden; /* Prevent bounce scrolling on iOS */
+    body.no-scroll {
+        overflow: hidden; /* Prevent bounce scrolling on iOS only when needed */
         -webkit-overflow-scrolling: touch;
     }
 }

@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import { RouterView, useRoute } from 'vue-router'
 import NavBar from '@/components/NavBar.vue';
 import LoadingScreen from './components/LoadingScreen.vue';
@@ -10,6 +10,16 @@ const messageStore = useMessage()
 const isLoading = ref(false)
 const progress = ref(0)
 const route = useRoute()
+
+// Handle scroll behavior based on route
+watch(() => route.path, (newPath) => {
+    // Only prevent scroll on home page (chat interface)
+    if (newPath === '/') {
+        document.body.classList.add('no-scroll')
+    } else {
+        document.body.classList.remove('no-scroll')
+    }
+}, { immediate: true })
 
 onMounted(async () => {
     try {
@@ -51,6 +61,11 @@ onMounted(async () => {
     flex: 1;
     display: flex;
     flex-direction: column;
+    overflow: auto; /* Allow scroll by default */
+}
+
+/* Only hide overflow for home route (chat interface) */
+:global(body.no-scroll) .app-content {
     overflow: hidden;
 }
 </style>

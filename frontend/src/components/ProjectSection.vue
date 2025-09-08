@@ -110,14 +110,22 @@ const descriptions = {
 <style scoped>
 .container {
     display: flex;
+    flex-wrap: wrap;
     justify-content: flex-start;
-    gap: 40px;
+    gap: 30px;
     height: auto;
+}
+
+@media (max-width: 1200px) {
+    .container {
+        gap: 20px;
+    }
 }
 
 @media (max-width: 768px) {
     .container {
         flex-direction: column;
+        gap: 30px;
     }
 }
 </style>

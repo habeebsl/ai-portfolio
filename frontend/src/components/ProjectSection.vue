@@ -69,7 +69,7 @@ const descriptions = {
             description="AI-powered culturally-aware audio advertisement generator"
             link="https://avox-sepia.vercel.app"
             githubLink="https://github.com/habeebsl/Avox"
-            videoLink="https://youtu.be/Xde9mr1_Kxo"
+            videoLink="https://www.youtube.com/embed/Xde9mr1_Kxo"
             thumbnail="/images/avox_thumbnail.png"
             :fullDescription="descriptions.avox"
         />

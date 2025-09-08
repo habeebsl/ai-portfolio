@@ -31,7 +31,7 @@ Impact: Brands can create dozens of localized ad variants in minutes instead of 
 
 Website: https://avox-sepia.vercel.app
 GitHub: https://github.com/habeebsl/Avox
-Demo Video: https://youtu.be/Xde9mr1_Kxo
+Demo Video: https://www.youtube.com/embed/Xde9mr1_Kxo
 """
 
 keypoint_project = \

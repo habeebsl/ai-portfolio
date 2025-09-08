@@ -27,6 +27,7 @@ class VectorDatabase:
     index_data = {
         "personal_info": "personal: Personal and contact information for Habeeb Salami(Me), Professional goals, expertise areas, location.",
         "technical_skills": "skills: Technical skills including programming, frameworks, and AI expertise",
+        "avox": "avox: AI-powered culturally-aware audio advertisement generator with voice cloning and real-time localization",
         "ai_therapist": "ai therapist: AI-powered therapy application using CBT principles",
         "keypoint": "keypoint: Text analysis and information extraction tool",
         "chattersort": "chattersort: AI chatbot conversation management extension", 

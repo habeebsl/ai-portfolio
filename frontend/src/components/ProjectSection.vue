@@ -2,6 +2,24 @@
 import ProjectCard from './ProjectCard.vue';
 
 const descriptions = {
+    avox: `
+    Avox AI solves the challenge of creating culturally relevant advertisements for different markets worldwide. Generic ads often fail to connect with local audiences, but Avox automatically generates culturally-aware audio advertisements tailored to specific locations.
+
+    Key Features:
+    - Cultural Intelligence Engine: Analyzes local music, movie preferences, trends, weather, and regional slang using Qloo's Taste API and Google Trends
+    - Advanced Voice Cloning: Users can clone their voice in any language or let AI choose the perfect culturally-fit voice
+    - Complete Audio Production: Generates scripts, background music, and broadcast-ready audio ads
+    - Real-Time Generation: WebSocket streaming shows the AI's reasoning and creation process live
+
+    Technical Innovation:
+    - Multi-source intelligence pipeline combining cultural data, trends, and weather conditions
+    - ElevenLabs voice cloning with Redis-backed slot management system
+    - AI-driven content generation with specialized cultural prompts
+    - MusicGen for contextually appropriate background music
+
+    Impact: Brands can create dozens of localized ad variants in minutes instead of weeks, ensuring authentic resonance with each target market.
+    `,
+
     translator: `
     This is my latest project, offering multilingual real-time transcription of audio data, as well as real-time translation into multiple languages. Additionally, users can play back the translated text in a natural and intuitive human-like voice.
 
@@ -45,6 +63,16 @@ const descriptions = {
 
 <template>
     <div class="container">
+        <ProjectCard 
+            class="fade-in"
+            projectName="Avox"
+            description="AI-powered culturally-aware audio advertisement generator"
+            link="https://avox-sepia.vercel.app"
+            githubLink="https://github.com/habeebsl/Avox"
+            videoLink="https://youtu.be/Xde9mr1_Kxo"
+            thumbnail="/images/avox_thumbnail.png"
+            :fullDescription="descriptions.avox"
+        />
         <ProjectCard 
             class="fade-in"
             projectName="KeyPoint"

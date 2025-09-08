@@ -16,6 +16,24 @@ Landing Page: https://www.chattersort.com/
 GitHub: (Code available upon request) 
 """
 
+avox_project = \
+"""
+Avox AI:
+Avox AI solves the challenge of creating culturally relevant advertisements for different markets worldwide. Generic ads often fail to connect with local audiences, but Avox automatically generates culturally-aware audio advertisements tailored to specific locations.
+
+The project features a Cultural Intelligence Engine that analyzes local music, movie preferences, trends, weather, and regional slang using Qloo's Taste API and Google Trends. It includes advanced voice cloning capabilities where users can clone their voice in any language or let AI choose the perfect culturally-fit voice. The system provides complete audio production, generating scripts, background music, and broadcast-ready audio ads with real-time generation via WebSocket streaming.
+
+Technical Innovation includes a multi-source intelligence pipeline combining cultural data, trends, and weather conditions, ElevenLabs voice cloning with Redis-backed slot management system, AI-driven content generation with specialized cultural prompts, and MusicGen for contextually appropriate background music.
+
+The tech stack includes Python, FastAPI, React, TypeScript, Redis, ElevenLabs API, OpenAI GPT-4, Qloo Taste API, Google Trends API, Serper API, Weather API, and MusicGen.
+
+Impact: Brands can create dozens of localized ad variants in minutes instead of weeks, ensuring authentic resonance with each target market while maintaining their core brand identity.
+
+Website: https://avox-sepia.vercel.app
+GitHub: https://github.com/habeebsl/Avox
+Demo Video: https://youtu.be/Xde9mr1_Kxo
+"""
+
 keypoint_project = \
 """
 Keypoint:
@@ -120,6 +138,8 @@ documents = {
 
     "ai_therapist": therapist_project,
 
+    "avox": avox_project,
+
     "keypoint": keypoint_project,
 
     "chattersort": chattersort_project,
@@ -130,7 +150,7 @@ documents = {
     
     "email_marketer": marketer_project,
 
-    "projects": f"**Projects**\n{keypoint_project}\n\n{chattersort_project}\n\n{therapist_project}\n\n{activity_builder_project}\n\n{translator_project}\n\n{marketer_project}",
+    "projects": f"**Projects**\n{avox_project}\n\n{keypoint_project}\n\n{chattersort_project}\n\n{therapist_project}\n\n{activity_builder_project}\n\n{translator_project}\n\n{marketer_project}",
 
     "education": """
     **Education**
